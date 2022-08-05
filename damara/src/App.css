@@ -1,0 +1,133 @@
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/**
+* Title Cards
+*/
+.titleColor {
+  color: #5C6BC0;
+}
+
+/**
+* side-menu.css start
+*/
+body {
+  background: #E8EAF6;
+}
+
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background: linear-gradient(#0D47A1, #0D47A1) !important;
+}
+
+.text-muted:hover {
+  color: white !important;
+}
+
+.accordion {
+  margin-right: 5px;
+}
+
+.accordion-button {
+  font-size: 20px;
+  background: #5C6BC0;
+  color: white;
+}
+
+.anchor {
+  position: inherit;
+  margin-left: 5%;
+}
+
+.navbar-pad {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.card-padding {
+  padding-left: 13%;
+}
+
+.title-card-padding {
+  padding-left: 3%;
+  margin-right: 2%;
+}
+
+.sideNav-lg {
+  width: auto;
+}
+
+.main-wrapper {
+  min-height: auto;
+}
+
+@media screen and (min-width: 1240px) {
+  .sideNav-lg {
+    max-with: 300px;
+  }
+
+  .main-wrapper {
+    min-height: 512px;
+  }
+}
+
+
+@media screen and (min-width: 1400px) {
+  .main-wrapper {
+    min-height: 786px;
+  }
+  .sideNav-lg {
+    max-width: 315px;
+  }
+}
+
+/**
+* side-menu.css end
+*/
+
+/**
+ * Bar Chart Start
+ */
+.margin-left-80 {
+  margin-left: -80px
+}
+
+.red {
+  color: red;
+}
+
+.addressLine {
+  font-size: 18px;
+}

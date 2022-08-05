@@ -1,0 +1,3 @@
+cd ../
+call sam build --template-file ./infra.yaml
+call sam deploy --template-file ./infra.yaml --stack-name=intllpnt-iapps-ucase-dev-infra --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-keboggyh76p6 --capabilities CAPABILITY_NAMED_IAM --tags Application="Internal Apps Inventory Infrastructure" Environment="dev" buildInfo="v1" --region us-east-1 --no-fail-on-empty-changeset --parameter-overrides deployEnv=dev

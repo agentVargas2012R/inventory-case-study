@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Instruments the infrastructure for the intll-iapps-ucase
+
+Parameters:
+  deployEnv:
+    Type: String
+    Default: "dev"
+  nameSpace:
+    Type: String
+    Default: "intllpnt-iapps-ucase-dev"
+
+Resources:
+
+  DamaraBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+    DeletionPolicy: Retain
+
+  DamaraBucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref DamaraBucket
+                - /*
+      Bucket: !Ref DamaraBucket
+
+  IntlAppsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "pk"
+          AttributeType: "S"
+        - AttributeName: "sk"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "pk"
+          KeyType: "HASH"
+        - AttributeName: "sk"
+          KeyType: "RANGE"
+      ProvisionedThroughput:
+        ReadCapacityUnits: "1"
+        WriteCapacityUnits: "1"
+      TableName: !Sub "${AWS::StackName}-table"
+
+Outputs:
+  intlAppsTable:
+    Description: "Intll Apps Table storing all entities."
+    Value: !GetAtt IntlAppsTable.Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-table"
+  WebsiteURL:
+    Value: !GetAtt
+      - DamaraBucket
+      - WebsiteURL
+    Description: URL for Damara App
+  S3BucketSecureURL:
+    Value: !Join
+      - ''
+      - - 'https://'
+        - !GetAtt
+          - DamaraBucket
+          - DomainName
+    Description: Name of S3 bucket hosting the Damara App

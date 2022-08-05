@@ -1,0 +1,105 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Serverless Inventory API Micro-Service
+
+Parameters:
+  deployEnv:
+    Type: String
+    Default: "dev"
+  infraStack:
+    Type: String
+    Default: "intllpnt-iapps-ucase-dev-infra"
+  layerVersion:
+    Type: String
+    Default: "1"
+
+Resources:
+  InventoryApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub "${AWS::StackName}-api"
+      EndpointConfiguration: REGIONAL
+      StageName: !Ref deployEnv
+      Cors:
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+        AllowMethods: "'*'"
+
+  InventoryFunc:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${AWS::StackName}-inventory-lambda"
+      CodeUri: opalach/dist/
+      Handler: index.handler
+      #Layers:
+      #  - !Sub "arn:aws:lambda:us-east-1:${AWS::AccountId}:layer:aws-nodejs14x-nestjs-graphql-layer:${layerVersion}"
+      Runtime: nodejs14.x
+      AutoPublishAlias: live
+      Timeout: 10
+      MemorySize: 256
+      ReservedConcurrentExecutions: 1
+      Role: !GetAtt InventoryFuncRole.Arn
+      Environment:
+        Variables:
+          deployEnv: !Ref deployEnv
+          tableName: !Sub "${infraStack}-table"
+      Events:
+        any:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+            RestApiId: !Ref InventoryApi
+
+  InventoryFuncRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${AWS::StackName}-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: DBAccessPolicy
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'dynamodb:GetItem'
+                  - 'dynamodb:PutItem'
+                  - 'dynamodb:DeleteItem'
+                  - 'dynamodb:Scan'
+                  - 'dynamodb:Query'
+                  - 'dynamodb:BatchGetItem'
+                  - 'dynamodb:BatchWriteItem'
+                Resource:
+                  - !Sub
+                    - ${tableName}
+                    - { tableName: { Fn::ImportValue: !Join [ "-", [ !Ref infraStack , "table" ] ] } }
+        - PolicyName: LogsPolicy
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:*
+                Resource: arn:aws:logs:*:*:*
+
+Outputs:
+  inventoryApiId:
+    Description: "Inventory Endpoint ID"
+    Value: !Ref InventoryApi
+    Export:
+      Name: !Sub ${AWS::StackName}-rest-api-id
+  inventoryApiUrl:
+    Description: "Inventory Endpoint URL"
+    Value: !Sub "https://${InventoryApi}.execute-api.${AWS::Region}.amazonaws.com/Stage"
+    Export:
+      Name: !Sub ${AWS::StackName}-rest-api-url

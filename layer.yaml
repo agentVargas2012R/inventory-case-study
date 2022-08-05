@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  A Nodejs14x NestJS GraphQL Layer
+
+Parameters:
+  deployEnv:
+    Type: String
+    Default: "dev"
+
+Resources:
+  AWSNodeJS14xNestJSGraphQLLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: aws-nodejs14x-nestjs-graphql-layer
+      Description: Runtime for the nestjs graphql node environments.
+      ContentUri: aws-nodejs14x-nestjs-graphql-layer/
+      CompatibleRuntimes:
+        - nodejs14.x
+      LicenseInfo: 'MIT'
+      RetentionPolicy: Retain
+
+Outputs:
+  layerArn:
+    Description: The Layer Arn to reference in the other templates.
+    Value: !Ref AWSNodeJS14xNestJSGraphQLLayer
+    Export:
+      Name: !Sub "${AWS::StackName}-layer"
