@@ -4,18 +4,18 @@
 
 #### A sample reference implementation of an AWS Microservce developed with a serverless and automated approach with a React-Typescript front-end.
 
-Access the site here:
-1.) http://intllpnt-iapps-ucase-dev-infra-damarabucket-k8405x8uoi20.s3-website-us-east-1.amazonaws.com/upload
+* Access the site here:
+  * [Warehouse Dashboard Bucket](http://intllpnt-iapps-ucase-dev-infra-damarabucket-k8405x8uoi20.s3-website-us-east-1.amazonaws.com/upload)
 
-On the side nav menu, select management the supported files:
-1.) Warehouse - Warehouse.CSV
-2.) Product - Product.CSV
-3.) Inventory - Inventory.csv
+* On the side nav menu, select management the supported files:
+  * Warehouse - Warehouse.CSV 
+  * Product - Product.CSV 
+  * Inventory - Inventory.csv
 
-Select the File Type and the appropriate file upload.
+* Select the File Type and the appropriate file upload.
 
-Once all three files have been uploaded, selec the "Analytics" link.
-Review the stats and info related from the graphql query.
+* Once all three files have been uploaded, selec the "Analytics" link. 
+* Review the stats and info related from the graphql query.
 
 
 Note - even though mutliple graphql endpoints where exposed, in the end, everything
