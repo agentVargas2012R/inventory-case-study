@@ -2,14 +2,14 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import React, {useState} from "react";
-import {IProductsItem, UPLOAD_ENDPOINT} from "../models/Model";
+import {UPLOAD_ENDPOINT} from "../models/Model";
 import Axios from "axios";
 
 export default function UploadCard() {
     const [enableButton, setEnableButton] = useState(true);
     const [showMessage, setShowMessage] = useState(false);
     const [fileSelected, setFileSelected] = useState<File>();
-    const [dropDownList, setDropDownList] = useState(["WAREHOUSE_CSV", "PRODUCT_CSV", "INVENTORY_CSV"]);
+    const [dropDownList] = useState(["WAREHOUSE_CSV", "PRODUCT_CSV", "INVENTORY_CSV"]);
     let [selectOption, setSelectOption] = useState("INVENTORY_CSV");
     let [uploadedComplete, setUploadedComplete] = useState<Boolean>(false);
 
