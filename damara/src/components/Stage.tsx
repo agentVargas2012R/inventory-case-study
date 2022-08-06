@@ -4,10 +4,14 @@ import {Accordion, Nav} from "react-bootstrap";
 import {Link, Outlet} from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Row from 'react-bootstrap/Row';
-import { FaChartLine, FaCloud, FaDatabase, FaWarehouse, FaReact, FaBootstrap, FaGoogle, FaAws, FaVectorSquare, FaFileSignature } from 'react-icons/fa';
+import { FaChartLine, FaDatabase, FaWarehouse, FaReact, FaBootstrap, FaGoogle, FaAws, FaVectorSquare, FaFileSignature } from 'react-icons/fa';
 
 export default class Stage extends React.Component {
     render() {
+        /**
+         *
+         */
+
         return (
             <Row className={'main-wrapper'} fluid>
                 <Col xs={12} sm={3} className={"bg-dark"}>
@@ -21,13 +25,13 @@ export default class Stage extends React.Component {
                                     <Accordion.Header className={"dark-background menu"}>Warehouse</Accordion.Header>
                                     <Accordion.Body className={"bg-dark"}>
                                         <Nav.Item as="li">
-                                            <div className={"anchor"}>
-                                                <Link className={"hover-link"} to="/inventory"><FaChartLine/> Analytics</Link>
+                                            <div className={"anchor hover-link"}>
+                                                <Link to="/inventory"><FaChartLine/> Analytics</Link>
                                             </div>
                                         </Nav.Item>
                                         <Nav.Item as="li">
-                                            <div className={"anchor"}>
-                                                <Link to="/upload"><FaWarehouse /> Management</Link>
+                                            <div className={"anchor hover-link"}>
+                                                <Link  to="/upload"><FaWarehouse /> Management</Link>
                                             </div>
                                         </Nav.Item>
                                     </Accordion.Body>

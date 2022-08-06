@@ -13,8 +13,6 @@ export interface IAnalytics {
 
 export default function AnalyticCard(ianalytics: IAnalytics) {
 
-    let prdcts = useState(ianalytics);
-
     return (
         <Card className={"card-padding mt-2 mb-2"}>
             <CardContent>

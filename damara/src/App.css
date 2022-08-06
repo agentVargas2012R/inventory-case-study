@@ -66,6 +66,15 @@ a:link {
   transition: color 0.5s, transform 0.5s;
 }
 
+.nav-link, .nav-link:active {
+  color: white;
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
 a {
   color: white;
 }
@@ -76,6 +85,11 @@ a:hover {
 }
 
 .hover-link {
+  color: white;
+  transition: color 0.5s, transform 0.5s;
+}
+
+.hover-link:hover {
   color: white;
   transform: scale(1.1);
 }

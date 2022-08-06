@@ -9,7 +9,6 @@ import {IProductsItem, IWarehouse, IData, GRAPH, GRAPHQL_ENDPOINT} from "../mode
 import {GraphQLClient, gql} from 'graphql-request';
 
 import OutOfStockCard from "../components/OutOfStockCard";
-import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const graphQLAWS = new GraphQLClient(GRAPHQL_ENDPOINT);
 
@@ -41,7 +40,7 @@ export default function Inventory() {
 
     return (
         <Container fluid={"fluid"}>
-            {warehouse.map( (warehouse:  IWarehouse, indexNumber) => (
+            {warehouse.map( (warehouse:  IWarehouse) => (
               <div >
                 <Row fluid={"fluid"} >
 
