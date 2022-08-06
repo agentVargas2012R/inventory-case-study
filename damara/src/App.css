@@ -56,9 +56,30 @@ body {
   color: white !important;
 }
 
-.accordion {
-  margin-right: 5px;
+a:link {
+  text-decoration: none;
+  transition: color 0.5s, transform 0.5s;
 }
+
+a:link {
+  color: white;
+  transition: color 0.5s, transform 0.5s;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.hover-link {
+  color: white;
+  transform: scale(1.1);
+}
+
 
 .accordion-button {
   font-size: 20px;
@@ -93,7 +114,40 @@ body {
   min-height: auto;
 }
 
+.row-override {
+  margin-right: -35px !important;
+}
+
+.margin-right {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 375px) {
+  .row-override {
+    margin-right: 0px !important;
+  }
+
+  .margin-right {
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+  }
+  .accordion {
+    margin-right: 0px;
+    padding: 15px;
+  }
+}
+
 @media screen and (min-width: 1240px) {
+  .sideNav-width {
+    position: fixed;
+    height: 100%;
+    width: 20%;
+    z-index: 1;
+    overflow-x: hidden;
+    padding-top: 10px;
+    font-size: 20px;
+  }
+
+
   .sideNav-lg {
     max-with: 300px;
   }
@@ -105,6 +159,16 @@ body {
 
 
 @media screen and (min-width: 1400px) {
+  .sideNav-width {
+    position: fixed;
+    height: 100%;
+    width: 18%;
+    z-index: 1;
+    overflow-x: hidden;
+    padding-top: 10px;
+    font-size: 20px;
+  }
+
   .main-wrapper {
     min-height: 786px;
   }

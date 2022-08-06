@@ -11,7 +11,8 @@ interface IFileUpload {
 }
 
 export default function UploadCard() {
-
+    const [enableButton, setEnableButton] = useState(true);
+    const [showMessage, setShowMessage] = useState(false);
     const [fileSelected, setFileSelected] = useState<File>();
     const [dropDownList, setDropDownList] = useState(["WAREHOUSE_CSV", "PRODUCT_CSV", "INVENTORY_CSV"]);
     let [selectOption, setSelectOption] = useState("INVENTORY_CSV");
@@ -20,8 +21,16 @@ export default function UploadCard() {
 
     const handleChange = function(e: React.ChangeEvent<HTMLInputElement>) {
         const fileList = e.target.files;
+        console.log(e.target.files);
         if(!fileList) return;
+        if(!(fileList[0].name.endsWith(".csv"))) {
+            setShowMessage(true);
+            return
+        }
+
+        setShowMessage(false);
         setFileSelected(fileList[0]);
+        setEnableButton(false);
     }
 
     const uploadFile = async function(e: React.MouseEvent<HTMLSpanElement, MouseEvent> | React.TouchEvent) {
@@ -29,7 +38,11 @@ export default function UploadCard() {
             const formData = new FormData();
             formData.append("fileType", selectOption);
             formData.append('file', fileSelected, fileSelected.name);
-            await Axios.post(UPLOAD_ENDPOINT, formData).catch((err) => console.log(err));
+            await Axios.post(UPLOAD_ENDPOINT, formData, {
+                headers: {
+                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                }
+            }).catch((err) => console.log(err)).catch(err => setUploadedComplete(false));
             setUploadedComplete(true)
         }
     }
@@ -72,9 +85,10 @@ export default function UploadCard() {
                             }
                         </select>
                         <br/>
+                        { showMessage && <p className={"red"}>Only CSV Files Are Supported.</p>}
                         <input type="file" onChange={handleChange}/>
                         <br/>
-                        <button onClick={uploadFile} className={"btn btn-primary mt-5"}>
+                        <button onClick={uploadFile} className={"btn btn-primary mt-5"} disabled={enableButton}>
                             Save
                         </button>
                     </div>

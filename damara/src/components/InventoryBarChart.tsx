@@ -1,5 +1,4 @@
 import "../App.css";
-import React from "react";
 import {
     BarChart,
     Bar,
@@ -9,7 +8,10 @@ import {
     Tooltip,
     Legend
 } from "recharts";
+
 import {IAnalytics} from "./AnalyticCard";
+import {useState} from "react";
+
 
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -28,8 +30,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 
 export default function InventoryBarChart(ianalytics: IAnalytics) {
-
-
      let data: any = [];
      ianalytics.products.map((item) => {
          data.push({
@@ -40,9 +40,20 @@ export default function InventoryBarChart(ianalytics: IAnalytics) {
          })
      });
 
+
+    let width = 50;
+    if(window.innerWidth > 700) {
+        width = 700
+    } else if (window.innerWidth > 700) {
+        width = 500
+    } else {
+        width = window.innerWidth - 50;
+    }
+
     return (
+
         <BarChart className={"margin-left-80"}
-            width={700}
+            width={width}
             height={300}
             data={data}
             margin={{

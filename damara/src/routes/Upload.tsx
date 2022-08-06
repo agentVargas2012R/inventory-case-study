@@ -10,7 +10,7 @@ export default class Upload extends React.Component {
         return (
             <Container fluid="true">
                 <div>
-                    <Row fluid>
+                    <Row fluid className={"margin-right"}>
                         <UploadCard />
                     </Row>
                 </div>

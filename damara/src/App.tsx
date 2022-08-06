@@ -18,7 +18,7 @@ import Stage from "./components/Stage";
 function App() {
   return (
     <div className="App">
-      <Container >
+      <Container className={"bg-light"}>
         <Row >
             <Navbar bg="dark" className={"navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light text-muted me-1"} expand="lg">
                 <Container fluid={"fluid"} >

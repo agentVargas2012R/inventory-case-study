@@ -9,11 +9,14 @@ import {IProductsItem, IWarehouse, IData, GRAPH, GRAPHQL_ENDPOINT} from "../mode
 import {GraphQLClient, gql} from 'graphql-request';
 
 import OutOfStockCard from "../components/OutOfStockCard";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const graphQLAWS = new GraphQLClient(GRAPHQL_ENDPOINT);
 
 export async function getWarehouseData(): Promise<IWarehouse[]> {
-    const  data: any  = await graphQLAWS.request(GRAPH, {});
+    const  data: any  = await graphQLAWS.request(GRAPH, {}, {
+        "Access-Control-Allow-Origin": "http://localhost:3000"
+    });
     console.log("RESPONSE FROM GRAPHQL API");
     console.log(data);
     return data.all as IWarehouse[]
@@ -39,8 +42,8 @@ export default function Inventory() {
     return (
         <Container fluid={"fluid"}>
             {warehouse.map( (warehouse:  IWarehouse, indexNumber) => (
-              <div>
-                <Row fluid={"fluid"}>
+              <div >
+                <Row fluid={"fluid"} >
 
                     <Col xs={12}>
                         <TitleCard key={generateKey(warehouse.name)} name={warehouse.name} address={warehouse.address} city={warehouse.city} state={warehouse.state} zipCode={warehouse.zipCode} phoneNumber={warehouse.phoneNumber}/>
@@ -52,10 +55,10 @@ export default function Inventory() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={6}>
+                    <Col xs={12} sm={6}>
                         <StatCard key={generateKey(warehouse.name)} name={"Cost"} products={warehouse.products} description={"Total cost at this facility."} color={"black"} />
                     </Col>
-                    <Col xs={6}>
+                    <Col xs={12} sm={6}>
                         <OutOfStockCard key={generateKey(warehouse.name)} warehouse={warehouse}/>
                     </Col>
                 </Row>
