@@ -1,17 +1,14 @@
 import React from 'react';
-import styled from "styled-components";
 import {Accordion, Nav} from "react-bootstrap";
 import {Link, Outlet} from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Row from 'react-bootstrap/Row';
 import { FaChartLine, FaDatabase, FaWarehouse, FaReact, FaBootstrap, FaGoogle, FaAws, FaVectorSquare, FaFileSignature } from 'react-icons/fa';
 
+import "./Stage.css";
+
 export default class Stage extends React.Component {
     render() {
-        /**
-         *
-         */
-
         return (
             <Row className={'main-wrapper'} fluid>
                 <Col xs={12} sm={3} className={"bg-dark"}>

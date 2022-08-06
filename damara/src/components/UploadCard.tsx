@@ -1,14 +1,9 @@
-import ReactDOM from "react-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import React, {useState} from "react";
 import {IProductsItem, UPLOAD_ENDPOINT} from "../models/Model";
-import {FaFile} from 'react-icons/fa';
 import Axios from "axios";
-interface IFileUpload {
-    fileUpload: any
-}
 
 export default function UploadCard() {
     const [enableButton, setEnableButton] = useState(true);
@@ -17,6 +12,7 @@ export default function UploadCard() {
     const [dropDownList, setDropDownList] = useState(["WAREHOUSE_CSV", "PRODUCT_CSV", "INVENTORY_CSV"]);
     let [selectOption, setSelectOption] = useState("INVENTORY_CSV");
     let [uploadedComplete, setUploadedComplete] = useState<Boolean>(false);
+
     const list = dropDownList.map(dropDownList => dropDownList);
 
     const handleChange = function(e: React.ChangeEvent<HTMLInputElement>) {
