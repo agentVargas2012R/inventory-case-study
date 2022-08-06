@@ -158,10 +158,8 @@ overwrote it only to find out that it's a giraffe.
 
 The NestJS framework is used in this stack is being used to serve the content and interface with the AWS ecosystem. The framework is setup as a microservice and handles all the HTTP Verb requests sent to the API Gateway.
 
-This rest service contains a Swagger OpenSpec 3.0 specification endpoint when hitting the api-json endpoint.
-
 Locally, the NestJS application will boot up using the default approach, however, on the AWS environment, it will bootstrap using the ExpressAdapter utilizing aws-serverless-express and passing the loaded application to the aws lambda-handler.
-The determination of which to use is configured through the run.sh script.
+The framework is responsible for handling of file uploads and graphql requests.
 
 ### GraphQL 
 
@@ -395,6 +393,7 @@ graphql on aws serverless technology.
 The system architecture and design is exposed as the following two systems.
 
 ![System Design](https://github.com/agentVargas2012R/inventory-case-study/blob/master/system.png)
+
 As you might expect, this is a traditional AWS microservice.
 
 If we wanted to extend the systems to others internal/external,
