@@ -29,14 +29,7 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script id="loader">
-      var loadedAlready = localStorage.getItem("loadedAlready");
-      if(!loadedAlready) window.location.href = "/upload"
-      localStorage.setItem("loadedAlready", "loadedAlready");
-      setTimeout(function() {
-        localStorage.removeItem("loadedAlready");
-      }, 2000);
-    </script>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.

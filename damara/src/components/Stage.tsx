@@ -7,10 +7,11 @@ import { FaChartLine, FaDatabase, FaWarehouse, FaReact, FaBootstrap, FaGoogle, F
 
 import "./Stage.css";
 
+
 export default class Stage extends React.Component {
     render() {
         return (
-            <Row className={'main-wrapper'} fluid>
+            <Row className={'main-wrapper'}>
                 <Col xs={12} sm={3} className={"bg-dark"}>
 
                     <div className={"sideNav-width"}>

@@ -89,9 +89,6 @@ export default function UploadCard() {
                         </button>
                     </div>
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-
-                </Typography>
             </CardContent>
         </Card>
     );
